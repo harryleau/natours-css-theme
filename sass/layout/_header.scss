@@ -1,0 +1,66 @@
+.header {
+	height: 85vh;
+  background-image: 
+    linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8), 
+      rgba($color-primary-dark, 0.8)), 
+		url(../img/hero-small.jpg);
+	background-size: cover;
+	background-position: top;
+  position: relative;
+  overflow: hidden;
+
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    -ms-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+
+  /* USE CSS FOR BACKGROUND-IMG
+     
+    In this case, we have 2 imgs: 2000px and 1200px
+   - use large img when: 
+      1. high resolution (192dpi) and screen size over 600px (or 37.5em)
+      2. screen size over 2000px (0r 125em)
+   - if screen size below 600px and high resolution, small img (1200px) is good enough.
+
+   - min-resolution is not supported in safary, we have to use -webkit-min-device-pixel-ratio: 2, which is
+   the same as min-resolution: 192pi.
+   */
+
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em), 
+          (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+          (min-width: 125em) { 
+    background-image: 
+      linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8), 
+        rgba($color-primary-dark, 0.8)), 
+      url(../img/hero.jpg);
+  }
+  
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+}
